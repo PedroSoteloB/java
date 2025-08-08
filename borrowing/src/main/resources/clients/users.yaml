@@ -1,0 +1,157 @@
+# openapi: 3.0.4
+# info:
+#   title: API Users - OpenAPI 3.0
+#   description: This an API to manage users as core
+#   contact:
+#     email: harolav3@gmail.com
+#   version: 0.1.1
+# servers:
+#   - url: https://localhost:8081
+# tags:
+#   - name: User
+#     description: Operations about user
+# paths:
+#   /users:
+#     get:
+#       tags:
+#         - User
+#       summary: Get all Users
+#       operationId: getAllUsers
+#       responses:
+#         "200":
+#           description: A list of users
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/ArrayOfUsers"
+#     post:
+#       tags:
+#         - User
+#       summary: Add a new user to database
+#       description: Add a new user to database using reactive programming
+#       operationId: addUser
+#       requestBody:
+#         description: Create a new user in the store
+#         content:
+#           application/json:
+#             schema:
+#               $ref: '#/components/schemas/UserSave'
+#         required: true
+#       responses:
+#         '201':
+#           description: Successful operation
+#         '400':
+#           description: Invalid input
+  
+  
+#   /users/{userId}:
+#     patch:
+#       tags:
+#         - User
+#       summary: Update User by ID
+#       description: Update User
+#       operationId: updateUserById
+#       requestBody:
+#         description: Create a new user in the store
+#         content:
+#           application/json:
+#             schema:
+#               $ref: '#/components/schemas/UserSave'
+#       parameters:
+#         - name: userId
+#           in: path
+#           description: ID of user to update
+#           required: true
+#           schema:
+#             type: integer
+#             format: int64
+#       responses:
+#         '200':
+#           description: successful operation
+#         '404':
+#           description: User not found
+#     get:
+#       tags:
+#         - User
+#       summary: Find User by ID.
+#       description: Returns a single user.
+#       operationId: getUserById
+#       parameters:
+#         - name: userId
+#           in: path
+#           description: ID of user to return
+#           required: true
+#           schema:
+#             type: integer
+#             format: int64
+#       responses:
+#         '200':
+#           description: successful operation
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: '#/components/schemas/User'
+#         '404':
+#           description: User not found
+    
+#     delete:
+#       tags:
+#         - User
+#       summary: Deletes an User.
+#       description: Delete an user.
+#       operationId: deleteUser
+#       parameters:
+#         - name: userId
+#           in: path
+#           description: Pet id to delete
+#           required: true
+#           schema:
+#             type: integer
+#             format: int64
+#       responses:
+#         '200':
+#           description: Pet deleted
+#         '404':
+#           description: User not found
+  
+  
+# components:
+#   schemas:
+#     ArrayOfUsers:
+#       type: array
+#       items:
+#         $ref: '#/components/schemas/User' 
+#     UserSave:
+#       type: object
+#       properties:
+#         name:
+#           type: string
+#           example: theUser
+#         lastName:
+#           type: string
+#           example: James
+#         email:
+#           type: string
+#           example: john@email.com
+#         phonenumber:
+#           type: string
+#           example: '12345'
+        
+#     User:
+#       type: object
+#       properties:
+#         id:
+#           type: integer
+#         name:
+#           type: string
+#           example: theUser
+#         lastName:
+#           type: string
+#           example: James
+#         email:
+#           type: string
+#           example: john@email.com
+#         phonenumber:
+#           type: string
+#           example: '12345'
+    

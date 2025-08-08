@@ -1,0 +1,27 @@
+# spring:
+#   application:
+#     name: ms-users
+
+#   r2dbc:
+#     url: r2dbc:postgresql://localhost:5432/users
+#     username: postgres
+#     password: pedro
+
+# server:
+#   port: 8081
+
+spring:
+  application:
+    name: ms-users
+
+  r2dbc:
+    # url: r2dbc:postgresql://localhost:5432/users
+    url: r2dbc:postgresql://postgres-db:5432/users
+    username: postgres
+    password: pedro
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8081

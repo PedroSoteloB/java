@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  users:
+    container_name: com.pedro.users
+    build:
+      context: com.pedro.users
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=host.docker.internal:9092
+    depends_on:
+      - postgres-db
+
+  books:
+    container_name: com.pedro.book
+    build:
+      context: com.pedro.book
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=host.docker.internal:9092
+    depends_on:
+      - postgres-db
+
+  borrow:
+    container_name: com.pedro.borrow
+    build:
+      context: com.pedro.borrow
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=host.docker.internal:9092
+    depends_on:
+      - postgres-db
+
+  notification:
+    container_name: com.pedro.notification
+    build:
+      context: com.pedro.notification
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=host.docker.internal:9092
+    depends_on:
+      - borrow

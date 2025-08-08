@@ -1,0 +1,114 @@
+ docker exec -it postgres-db psql -U postgres -d users
+
+
+USERS:
+
+Método: GET
+Obtener usuario por ID (GET)
+URL: http://localhost:8081/users/{id}
+http://localhost:8081/users/1
+
+Método: POST
+http://localhost:8081/users
+JSON:
+{
+  "name": "Antonio",
+  "lastname": "González",
+  "phonenumber": "956235713",
+  "email": "antonio@example.com"
+}
+
+select *  from users order by id;
+----------------------------------------------------------------------------
+select *  from books order by id;
+BOOKS:
+
+1. GET /books
+Método: GET
+URL: http://localhost:8082/books/{id}
+ejm: http://localhost:8082/books/2
+
+Trae la lista de los libros: http://localhost:8082/books
+
+
+2. POST /books
+URL:http://localhost:8082/books
+
+json
+{
+  "title": "Clean Code 3",
+  "author": "Robert C. Martin",
+  "isbn": "9780132350884",
+  "available": true
+}
+
+
+3. PATCH /books/{id}/availability
+
+URL: `http://localhost:8082/books/{id}/availability`
+      http://localhost:8082/books/1/availability
+json
+{
+  "available": false
+}
+
+
+----------------------------------------------------------------------------
+
+
+
+Borrowing:
+
+Método: POST
+1. Crear préstamo (POST /borrowings)
+
+URL: http://localhost:8083/borrowings
+
+
+json
+{
+  "userId": 2,
+  "bookId": 5
+}
+
+
+Método: GET
+2. Obtener préstamos por usuario (GET /borrowings/user/{userId})
+
+URL: http://localhost:8083/borrowings/user/2
+
+
+3. Devolver libro (PATCH /borrowings/{id}/return)
+
+URL: `http://localhost:8083/borrowings/10/return
+
+
+
+-----------------------------------------------------
+consultar prestamos libros:
+http://localhost:8083/borrowings
+---------------------------------------------------
+
+
+
+
+acceder a la bd de Docker: 
+ docker exec -it postgres-db psql -U postgres -d users
+
+
+--
+spring:
+  application:
+    name: ms-users
+
+  r2dbc:
+    # url: r2dbc:postgresql://localhost:5432/users
+    url: r2dbc:postgresql://postgres-db:5432/users
+    username: postgres
+    password: pedro
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8081
